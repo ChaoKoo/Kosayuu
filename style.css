@@ -1,0 +1,235 @@
+/* CSS 重置：确保浏览器表现一致 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* 极简高级配色方案：深色背景，柔和亮色，内敛强调色 */
+    --primary-bg: #0d0d0d;       /* 几乎纯黑的深背景 */
+    --secondary-bg: #1c1c1c;     /* 次级背景/卡片背景 */
+    --text-light: #f5f5f5;       /* 主要文字颜色 */
+    --text-muted: #888888;       /* 辅助文字颜色 */
+    --accent-color: #d1b88e;     /* 柔和金色或大地色强调色 */
+    --font-sans: 'Inter', sans-serif;
+    --content-width: 90vw;
+    --max-content-width: 1400px;
+}
+
+body {
+    background-color: var(--primary-bg);
+    color: var(--text-light);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    cursor: none; /* 隐藏默认光标 */
+    /* 阻止 Safari 滚动时的微小粘性 */
+    -webkit-font-smoothing: antialiased; 
+}
+
+/* --- 1. 自定义光标样式 (增强视觉效果) --- */
+#custom-cursor {
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none; 
+    z-index: 9999;
+    transform: translate(-50%, -50%); 
+    transition: all 0.1s ease-out; /* 快速跟随 */
+    mix-blend-mode: difference; /* 关键：在亮色区域保持可见，增强高级感 */
+}
+
+#custom-cursor.hovered {
+    width: 60px;
+    height: 60px;
+    opacity: 0.2; /* 悬停时放大并半透明 */
+    border: none;
+    background-color: var(--text-light); 
+}
+
+
+/* --- 2. 头部导航 --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 5vw;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+}
+
+.nav-item {
+    margin-left: 40px;
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 0.95rem;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+.nav-item:hover {
+    opacity: 1;
+}
+
+/* --- 3. 英雄区 (Hero Section) --- */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5vw;
+    text-align: left;
+    /* 留出更多空间以便于滚动触发 */
+    margin-bottom: 100vh; 
+}
+
+.hero-content {
+    max-width: var(--max-content-width);
+    width: var(--content-width);
+}
+
+.role-text {
+    font-size: 1rem;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.headline {
+    font-size: 6vw; /* 使用相对视口宽度，更具冲击力 */
+    font-weight: 800;
+    line-height: 1.1;
+    overflow: hidden; /* 隐藏行内元素，配合 GSAP 实现文字逐行出现效果 */
+}
+.headline span {
+    display: block; /* 使每一行文字独立 */
+}
+
+.cta-wrapper {
+    margin-top: 60px;
+}
+.cta-button {
+    font-size: 1.1rem;
+    color: var(--accent-color);
+    text-decoration: none;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--accent-color);
+    transition: color 0.3s, border-color 0.3s;
+}
+.cta-button:hover {
+    color: var(--text-light);
+    border-color: var(--text-light);
+}
+
+/* --- 4. 作品集样式 (Portfolio Section) --- */
+.portfolio-section {
+    min-height: 100vh;
+    padding: 100px 5vw;
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 100px;
+    text-align: left;
+}
+
+/* 高级感网格布局 */
+.portfolio-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 两列布局 */
+    gap: 40px;
+}
+
+.project-card {
+    background-color: var(--secondary-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    cursor: none;
+    min-height: 350px;
+    opacity: 0; 
+}
+
+.large-card {
+    grid-column: span 2; /* 大卡片占据两列 */
+    min-height: 500px;
+}
+
+.project-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 30px;
+    z-index: 10;
+    width: 100%;
+    /* 添加渐变背景，使信息文字清晰可见 */
+    background: linear-gradient(to top, rgba(13, 13, 13, 0.8), rgba(13, 13, 13, 0));
+}
+
+.project-card h4 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.project-category, .project-year {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.project-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    transition: transform 0.5s ease-out; /* 图片放大动画 */
+}
+
+/* 鼠标悬停微动效：图片放大 */
+.project-card:hover .project-image-placeholder {
+    transform: scale(1.05);
+}
+
+
+/* --- 5. 底部 --- */
+.footer {
+    padding: 60px 5vw;
+    text-align: center;
+    border-top: 1px solid #1c1c1c;
+    color: var(--text-muted);
+}
+.footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.footer a:hover {
+    color: var(--text-light);
+}
+
+/* 移动端适配 (可选：为了高级感，我们保持大字体和简洁布局) */
+@media (max-width: 768px) {
+    .headline {
+        font-size: 10vw;
+    }
+    .portfolio-section {
+        grid-template-columns: 1fr; /* 移动端改为单列 */
+        gap: 30px;
+    }
+    .large-card {
+        grid-column: span 1;
+    }
+}
